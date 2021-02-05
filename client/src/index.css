@@ -1,0 +1,49 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.back-violet {
+    background-color: #9b59b6;
+}
+.back-blue {
+    background-color: #3498db;
+}
+.text-white {
+    color: #dddddd !important;
+}
+.text-violet {
+    color: #ba9de0;
+}
+.text-blue {
+    color: #3498db;
+}
+.text-black {
+    color: #34495e;
+}
+.back-black {
+    background-color: #34495e;
+}
+.form-control:focus {
+    box-shadow: none;
+}
+.font-md {
+    font-size: 25px;
+}
+
+
+
+/* start design */
+.navbar-brand {
+    font-size: 24px;
+    font-weight: 700;
+}
+.nav-link {
+    font-size: 19px;
+    font-weight: 500;
+}
