@@ -3,6 +3,7 @@ import SubNavbar from '../components/SubNavbar'
 import Layout from '../components/Layout'
 import LandingPage from '../components/LandingPage'
 import Pros from '../components/Pros'
+import CardField from '../components/stripe';
 const Index = () => {
 
     return (

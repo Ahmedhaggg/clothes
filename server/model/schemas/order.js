@@ -15,18 +15,28 @@ const OrderSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    status: {
-        type: String,
-        enum: [ "noSent", "isSent"],
-        default: "noSent"
-    },
-    price: {
+    amount: {
         type: Number,
         required: true
     },
-    pay: {
+    charge: {
         type: Boolean,
         default: false
+    },
+    paymentId: {
+        type: String,
+        required: true
+    },
+    receipt_url: {
+        type: String,
+        required: true
+    }, 
+    address : {
+        type: {
+            zone: String,
+            city: String
+        },
+        required: true
     }
 }, { timestamps: true })
 

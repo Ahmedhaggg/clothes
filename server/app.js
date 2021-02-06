@@ -23,11 +23,13 @@ mongoose.connect('mongodb+srv://travels:AhmedHaggag@12345@cluster0.u5klm.mongodb
 
 // import routes
 const userRouter = require('./routes/user')
-const productsRouter = require('./routes/products'); 
+const productsRouter = require('./routes/products');
+const orderRouter = require('./routes/orders'); 
 const { error } = require('console');
 // using routes
 app.use('/api/', userRouter)
 app.use('/api/products/', productsRouter)
+app.use('/api/orders/', orderRouter)
 app.get('/test', (req, res, next) => {
     res.json({test: true, res: "success"})
 })

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/" id="form">
+        <button type="submit">
+            submit
+        </button>
+    </form>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script>
+    Stripe.setPublishableKey('pk_test_51HkkefDHNiYh4mtD5GwpaFvauahMirEbeTrkxR8AeNHRPr7T1hcOE7VhJk0zeEyGv3nN8gGKQaBPFhJeTl9w5DHJ00ayh57RyD');
+
+    document.getElementById('form').addEventListener('submit', e => {
+        e.preventDefault();
+        Stripe.card.createToken({
+            number: 4242424242424242,
+            cvc: 123,
+            exp_month: 12,
+            exp_year: 21
+        }, stripeResponseHandler)
+        return false;
+    })
+
+    async function stripeResponseHandler(status, response) {
+
+            if (response.error) {
+                console.log(response.error)
+            } else { 
+                let token = response.id;
+                let data = {token, amount: 12.12, quantity: 3, productId: "6017eb03f27d6915d4211311", userId: "600963fcf792a011c87613a3", 
+                    address: {
+                        zone: "beni madi",
+                        city: "beba"
+                    }
+                }
+                await fetch('http://localhost:8888/api/orders/add', {
+                    method: "post",
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+
+                    body: JSON.stringify(data)
+                }).then(res => {
+                    console.log(res.json())
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }
+    }
+</script>
+</body>
+</html>
