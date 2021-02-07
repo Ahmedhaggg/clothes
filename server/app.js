@@ -25,7 +25,7 @@ mongoose.connect('mongodb+srv://travels:AhmedHaggag@12345@cluster0.u5klm.mongodb
 const userRouter = require('./routes/user')
 const productsRouter = require('./routes/products');
 const orderRouter = require('./routes/orders'); 
-const { error } = require('console');
+
 // using routes
 app.use('/api/', userRouter)
 app.use('/api/products/', productsRouter)
