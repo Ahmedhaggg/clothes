@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Product = require('./schemas/product');
 const Category = require('./schemas/category');
-const Review = require('./schemas/review');
+const ProductReview = require('./schemas/review');
+const helperFs = require('../helper/helperFunctions');
 const slugify = require('slugify');
 
 
@@ -10,11 +11,12 @@ exports.getProduct = productSlug => {
         return Product.findOne({slug: productSlug})
             .then(result => {
                 if (result) {
-                    return Review.findOne({productId: result._id})
+                    return ProductReview.findOne({productId: result._id})
                         .then(review => {
                             resolve({
                                 product: result,
-                                totalRank: review.totalStars / review.reviewer,
+                                totalRank: helperFs.getRank(review.reviews),
+                                reviewsLength: review.reviews.length,
                                 reviews: review.reviews
                             })
                         })
@@ -38,7 +40,6 @@ exports.addProduct = data => {
             .then(product => {
                 return Category.findOneAndUpdate({name: data.category}, {$addToSet : {products: product._id}})
                     .then(result => {
-                        console.log( "this result" + result)
                         if (result) {
                             return Category.findOneAndUpdate({name: data.category}, {$addToSet : {products: product._id}})
                                 .then(() => resolve("the product has been added successfully"))
@@ -52,7 +53,12 @@ exports.addProduct = data => {
                             }
                             let newCategory = new Category(categoryInfo)
                             return newCategory.save()
-                                .then(() => resolve("The product has been added successfully"))
+                                .then(() => {
+                                    const newProductReview = new ProductReview({productId: product._id});
+                                    newProductReview.save()
+                                        .then(() => resolve("The product has been added successfully"))
+                                        .catch(() => reject("some thing went wrong"))
+                                })
                                 .catch(err => reject(err))
                         }
                     })
@@ -86,7 +92,6 @@ exports.updateProduct = (id, newDate) => {
     return new Promise((resolve, reject) => {
         return Product.findByIdAndUpdate(id, newDate)
             .then(res => {
-                console.log(res)
                 if (res) resolve("success to updata this product")
                 else reject("can't update this product")
             })
@@ -97,7 +102,6 @@ exports.updateProductImage =  (id, productImage) => {
     return new Promise((resolve, reject) => {
         return Product.findByIdAndUpdate(id, {$set:{productImage}}, (err, doc) => {
             if (err) {
-                console.log(err)
                 reject("Something went wrong");
             } else {
                 resolve(doc.productImage)
