@@ -17,15 +17,20 @@ exports.addOrder = data => {
     })
 }
 exports.deleteOrder = id => {
-    console.log(id)
     return new Promise((resolve, reject) => {
-        return Order.findByIdAndDelete(id)
+        return Order.findById(id)
             .then(result => {
-                if (result) {
-                    resolve("success to delete your product")
+                if (result.charge !== true) {
+                    Order.findByIdAndDelete(id)
+                        .then(() => resolve("success to delete your product"))
+                        .catch(() => reject("product is not found"))
+                    return;
+                } 
+                if (result.charge === true) {
+                    reject("your order is charge, can't cancel your order");
                     return;
                 }
-                reject("product is not found")
+                reject("product is not found");
             })
             .catch(() => reject("something went wrong"))
     })
