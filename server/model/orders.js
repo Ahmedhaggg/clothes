@@ -1,4 +1,3 @@
-const { findByIdAndDelete } = require('./schemas/order');
 const Order = require('./schemas/order');
 
 exports.getOrders = () => {

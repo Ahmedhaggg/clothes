@@ -15,8 +15,8 @@ exports.addOrder = (req, res, next) => {
     ).then( charge => {
         const { receipt_url, id,  amount } = charge;
         const  paymentId = id;
-        const { productId, userId, quantity, address } = req.body;
-        const data = { receipt_url, paymentId, amount, productId, userId, quantity, address  };
+        const { productsList, userId, quantity, address } = req.body;
+        const data = { receipt_url, paymentId, amount, productsList , userId, quantity, address  };
         orderModel.addOrder(data)
         .then(result => {
             res.status(200).json({
