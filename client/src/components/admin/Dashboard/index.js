@@ -7,7 +7,7 @@ import {FaStore, FaProductHunt, FaRegListAlt } from "react-icons/fa"
 import { IoStatsChart } from "react-icons/io5"
 const  Dashboard = () =>  {
     return (
-        <DashboardDesign className="back-black col-2">
+        <DashboardDesign className="back-black">
             <DsahboardTop className="dashboard-top mb-5 py-3 text-center text-white">
                 <span>FullBox</span>
             </DsahboardTop>
@@ -25,7 +25,7 @@ const  Dashboard = () =>  {
                     </NavLink>
                 </li>
                 <li className="nav-item mb-2">
-                    <NavLink to="/" className="nav-link text-white text-capitalize">
+                    <NavLink to="/admin/products" className="nav-link text-white text-capitalize">
                         <FaProductHunt className="mr-2 font-md"></FaProductHunt>
                         products
                     </NavLink>

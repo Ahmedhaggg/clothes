@@ -8,6 +8,9 @@ const app = express();
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.set('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.set('/views', express.static(path.join(__dirname, "views")))
+app.use(express.static(path.join(__dirname, 'assets')));
+app.set('view engine', "ejs")
 app.use(cors())
 
 
@@ -25,11 +28,15 @@ mongoose.connect('mongodb+srv://travels:AhmedHaggag@12345@cluster0.u5klm.mongodb
 const userRouter = require('./routes/user')
 const productsRouter = require('./routes/products');
 const orderRouter = require('./routes/orders'); 
-
+const reviewsRouter = require('./routes/reviews')
 // using routes
+app.use('/', (req, res, next) => {
+    res.render('index')
+})
 app.use('/api/', userRouter)
 app.use('/api/products/', productsRouter)
 app.use('/api/orders/', orderRouter)
+app.use('/api/reviews/', reviewsRouter)
 app.get('/test', (req, res, next) => {
     res.json({test: true, res: "success"})
 })

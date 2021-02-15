@@ -2,8 +2,7 @@ import React from 'react'
 import SubNavbar from '../components/SubNavbar'
 import Layout from '../components/Layout'
 import LandingPage from '../components/LandingPage'
-import Pros from '../components/Pros'
-import CardField from '../components/stripe';
+
 const Index = () => {
 
     return (
@@ -12,7 +11,7 @@ const Index = () => {
             <SubNavbar />
             <Layout>
                 < LandingPage />
-                <Pros />
+                
             </Layout>
         </div>
     )

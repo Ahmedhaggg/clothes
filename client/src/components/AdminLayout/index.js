@@ -10,12 +10,11 @@ const  Layout = props => {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                     <Dashboard />
                 </div>
-                <div className="col-10 mt-5">
+                <div className="col-9 mt-5">
                     <section>
-                        <SectionTitle className="text-center text-violet">{props.title}</SectionTitle>
                         {props.children}
                     </section>
                 </div>

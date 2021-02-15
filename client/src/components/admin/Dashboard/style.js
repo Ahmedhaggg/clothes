@@ -4,6 +4,7 @@ export const DashboardDesign = styled.section`
     top: 0;
     left: 0;
     height: 100vh;
+    width: 300px;
     overflow-y: auto;
 `
 export const DsahboardTop = styled.h2`

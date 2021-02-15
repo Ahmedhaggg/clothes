@@ -6,13 +6,9 @@ export const Item = styled.li`
     border-radius: 4px;
     color: #dddddd;
     .list-type {
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 600;
     };
-    .list-number {
-        font-size: 21px;
-        font-weight: 500;
-    }
     svg {
         font-size: 30px;
     }
