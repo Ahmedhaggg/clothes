@@ -12,7 +12,9 @@ exports.signin = (req, res, next) => {
             })
         })
         .catch( err => {
-            res.status(400).json({
+            console.log("err is hasbeen" + err)
+            res.status(409).json({
+                param: "validData",
                 message: err
             })
         })
@@ -64,9 +66,8 @@ exports.signinValidation = [
 ]
 exports.checkErr = (req, res, next) => {
     if (validationResult(req).array().length > 0) {
-        console.log(validationResult(req).array())
         return res.status(409).json({
-            err: validationResult(req).array()
+            message: validationResult(req).array()
         })
     }
     next()

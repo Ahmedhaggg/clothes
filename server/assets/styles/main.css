@@ -3,3 +3,29 @@
     margin: 0px;
     font-family: 'Open Sans', sans-serif;
 }
+.tx-white {
+    color: rgb(252, 252, 252);
+}
+.text-black {
+    color: #353535;
+}
+.custom-btn {
+    width: 50%;
+    margin: auto;
+    background-color: rgb(61, 130, 190);
+    color: #fff;
+    padding: 10px 0px;
+    border: none;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: none;
+    transition: opacity .3s;
+}
+.custom-btn:focus {
+    outline: none;
+}
+.custom-btn.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}

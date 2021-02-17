@@ -9,9 +9,11 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.addProduct = (req, res, next) => {
-    console.log(req.file.filename);
+    console.log(req.body);
     let productImage = req.file.filename;
-    const { name,  category, colors, price, discount  } = req.body;
+    console.log(req.file.filename)
+    let { name,  category, colors, price, discount  } = req.body;
+    colors = JSON.parse(colors)
     const slug = slugify(name)
     products.addProduct({name, slug , category , price , discount, productImage, colors})
         .then(message => res.status(201).json({message}))
@@ -20,6 +22,7 @@ exports.addProduct = (req, res, next) => {
                 if (err) {
                     return res.status(400).json({message: "something went wrong"});
                 };
+                console.log(message)
                 res.status(400).json({message});
             })
         )

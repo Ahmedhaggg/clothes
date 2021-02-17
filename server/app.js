@@ -29,10 +29,9 @@ const userRouter = require('./routes/user')
 const productsRouter = require('./routes/products');
 const orderRouter = require('./routes/orders'); 
 const reviewsRouter = require('./routes/reviews')
+const renderViewsRouter = require('./routes/renderviews')
 // using routes
-app.use('/', (req, res, next) => {
-    res.render('index')
-})
+app.use('/', renderViewsRouter)
 app.use('/api/', userRouter)
 app.use('/api/products/', productsRouter)
 app.use('/api/orders/', orderRouter)
@@ -41,7 +40,8 @@ app.get('/test', (req, res, next) => {
     res.json({test: true, res: "success"})
 })
 app.use((err, req, res, next) => {
-    res.send(error)
+    console.log(err)
+    res.send(err)
 })
 app.use((req, res, next) => {
     res.send('page is not found')
