@@ -1,7 +1,12 @@
 const products = require('../model/products');
 const slugify = require('slugify');
 const fs = require('fs');
+const { check , validationResult} = require('express-validator');
 let uploadsPath =  __dirname.replace("controller", "uploads") + '\\' ;
+
+/* validation */
+
+
 exports.getProduct = (req, res, next) => {
     products.getProduct(req.params.productSlug)
         .then(product => res.status(200).json(product))
@@ -9,11 +14,13 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.addProduct = (req, res, next) => {
-    console.log(req.body);
-    let productImage = req.file.filename;
-    console.log(req.file.filename)
+    if (!req.file) {
+        res.status(400).json({message: "you should select file"})
+    }
     let { name,  category, colors, price, discount  } = req.body;
-    colors = JSON.parse(colors)
+    console.log(colors)
+    colors = colors.split(",")
+    let productImage = req.file.filename;
     const slug = slugify(name)
     products.addProduct({name, slug , category , price , discount, productImage, colors})
         .then(message => res.status(201).json({message}))
@@ -52,6 +59,10 @@ exports.updateProduct = (req, res, next) => {
         .catch(err => res.status(400).json({message: err}))
 }
 exports.updateProductImage = (req, res, next) => {
+    if (!req.file.filename) {
+        res.status(400).json({message: "you should select file"});
+        return ;
+    };
     let { id } = req.body;
     products.updateProductImage(id, req.file.filename)
         .then(async productImage => 

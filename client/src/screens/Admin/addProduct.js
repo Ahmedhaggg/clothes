@@ -3,9 +3,10 @@ import Layout from '../../components/AdminLayout'
 import Input from '../../components/Ui/Input/index'
 import styled from 'styled-components'
 import {FaTimes} from 'react-icons/fa'
+import  { BsCheckCircle } from "react-icons/bs"
 import axios from 'axios';
 import {API_URL} from '../../constants' 
-
+import { Redirect } from 'react-router-dom'
 const ColorsList = styled.ul`
   display: flex;
   li {
@@ -47,6 +48,26 @@ const Previewer = styled.div`
     z-index: 2;
   }
 `
+const SuccessView = styled.div`
+  position: fixed;
+  top: -30%;
+  left: 62%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 0.5s;
+  width: 250px;
+  padding: 25px 0px;
+  text-align: center;
+  font-size: 19px;
+  background-color: #ddd;
+  z-index: 3;
+  &.active {
+    top: 50%;
+  };
+  .success-icon {
+    font-size: 40px;
+  }
+`
 const AddProduct = () => {
     let [colors, setColors] = useState([]);
     let [ getColor, setColor ] = useState('');
@@ -54,8 +75,11 @@ const AddProduct = () => {
     let [ price, setPrice ] = useState(0);
     let [ category , setCategory ] = useState("");
     let [ discount , setDiscount ] = useState(0);
-    let [selectedFile, setFile ] = useState(null)
-
+    let [ selectedFile, setFile ] = useState(null)
+    let [ reqErr, setReqErr ] = useState(false)
+    let [ disabled , changeDisabled ] = useState(false)
+    let [ success , setSuccess ] = useState(false)
+    let [ successMessage , setSuccessMessage ] = useState(false) 
     const addColor = e => {
       setColors([...colors, getColor])
       setColor("")
@@ -73,21 +97,28 @@ const AddProduct = () => {
     })
     const handelSubmit = e => {
       e.preventDefault();
-      console.log(e.currentTarget )
       const formData = new FormData();
       formData.append("productImage", selectedFile)
       formData.append("name", name)
       formData.append("price", price)
       formData.append("category", category)
       formData.append("discount", discount)
-      formData.append("colors", JSON.stringify(colors))
+      formData.append("colors", colors)
+      console.log(name + "   " + price)
       axios.post(`${API_URL}products/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .then(res => {
+        console.log(res)
+        setSuccessMessage(true)
+        setTimeout(()=> setSuccess(true), 1500)
+      })
+      .catch(err => {
+        setReqErr(err.response.data.message)
+        setTimeout(() => changeDisabled(false), 1000)
+      })
     }
     return (
         <Layout>
@@ -117,7 +148,22 @@ const AddProduct = () => {
                         <label className="custom-file-label">Choose file</label>
                       </div>
                     )}
-                    <input type="submit" class="btn btn-primary btn-lg btn-block shadow-none mt-4 mb-5" value="Add Product"/>
+                    {
+                      reqErr ? (
+                        <p className="alert alert-danger mt-4">{reqErr}</p>
+                      ) : null
+                    }
+                    {
+                      success ? <Redirect to="/" /> : false
+                    }  
+                    {
+                      successMessage ? <SuccessView className="text-primary active">
+                          <BsCheckCircle className="success-icon d-block mx-auto mb-2"/>
+                          Success to Add Product
+                        </SuccessView> 
+                      : null 
+                    }
+                    <input type="submit" className="btn btn-primary btn-lg btn-block shadow-none mt-4 mb-5" disabled={disabled} value="Add Product"/>
                 </form>
             </section>
         </Layout>

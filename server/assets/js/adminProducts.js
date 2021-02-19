@@ -1,7 +1,3 @@
-/* 
-    1- fetch products 
-    2- view products
-*/
 class LoadingProducts {
     static products = [];
     static fetchProducts() {
@@ -34,4 +30,4 @@ class LoadingProducts {
         document.querySelector(".products-content").innerHTML = productList;
     }
 }
-LoadingProducts.fetchProducts();
+// LoadingProducts.fetchProducts();

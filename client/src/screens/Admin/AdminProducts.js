@@ -14,12 +14,6 @@ const AdminProductsScreen = () => {
                 <DashboardItem backgroundColor="#00a8ff" text="Add product" link="/admin/products/add">
                     <AiOutlineAppstoreAdd />
                 </DashboardItem>
-                <DashboardItem backgroundColor="#00a8ff" text="Update product" link="/admin/products/update">
-                    <MdUpdate />
-                </DashboardItem>
-                <DashboardItem backgroundColor="#00a8ff" text="delete product" link="/admin/products/delete">
-                    <AiOutlineDelete />
-                </DashboardItem>
              </ul>
         </Layout>
     )

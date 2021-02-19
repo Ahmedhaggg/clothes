@@ -66,7 +66,7 @@ exports.addProduct = data => {
                         reject(err)
                     })
             })
-            .catch(err => reject(err))
+            .catch(() => reject("you should full product details"))
     })
 } 
 exports.deletProduct =  id => {

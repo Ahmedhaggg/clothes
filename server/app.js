@@ -7,8 +7,8 @@ const env = require('dotenv')
 const app = express();
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.set('/uploads', express.static(path.join(__dirname, 'uploads')))
-app.set('/views', express.static(path.join(__dirname, "views")))
+app.use(express.static(path.join(__dirname, 'uploads')))
+app.use(express.static(path.join(__dirname, "views")))
 app.use(express.static(path.join(__dirname, 'assets')));
 app.set('view engine', "ejs")
 app.use(cors())

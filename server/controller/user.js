@@ -64,11 +64,3 @@ exports.signinValidation = [
     check("password").not().isEmpty().withMessage("can't be empty")
     .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]/).withMessage("must match A-za-z0-9")
 ]
-exports.checkErr = (req, res, next) => {
-    if (validationResult(req).array().length > 0) {
-        return res.status(409).json({
-            message: validationResult(req).array()
-        })
-    }
-    next()
-} 

@@ -1,0 +1,19 @@
+<div>
+    <h4 class="text-white mt-4 mb-4 text-center">Dashboard</h4>
+    <% let items = [
+        {url: "/admin", text: "statics"},
+        {url: "/admin/products", text: "products"},
+        {url: "/admin/categories", text: "categories"},
+        {url: "/admin/orders", text: "orders"},
+        {url: "/admin/purchases", text: "purchases"},
+        {url: "/admin/users", text: "users"},
+    ] %> 
+    <ul class="nav flex-column">
+       
+        <% for(let i =0; i< items.length; i++){  %>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="<%= items[i].url%>"><%=items[i].text%></a>
+            </li>
+        <% } %>        
+     </ul>
+</div>
