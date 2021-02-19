@@ -3,6 +3,13 @@
   margin: 0px;
   font-family: "Open Sans", sans-serif;
 }
+a {
+  color: #353535;
+  cursor: pointer;
+}
+a:hover {
+  color: #353543;
+}
 .tx-white {
   color: rgb(252, 252, 252);
 }
@@ -41,4 +48,13 @@
   height: 45px;
   width: 100px;
   border-radius: 0%;
+}
+/* admin products */
+.admin-product-item .delete-product,
+.admin-product-item .update-product {
+  font-size: 20px;
+  padding: 5px 9px;
+  border-radius: 3px;
+  color: #eee;
+  cursor: pointer;
 }

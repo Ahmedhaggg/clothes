@@ -11,23 +11,43 @@ class LoadingProducts {
     }
 
     static viewProducts() {
-        console.log(this.products)
         const productList = this.products.map(product => 
              `
-            <div class="col col-lg-3 col-md-4 col-sm-6">
-                <div class="card">
-                    <img class="card-img-top" src="/${product.productImage}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="row bg-light admin-product-item py-3 mb-3">
+                    <div class="col-3">${product.name}</div>
+                    <a class="col-3 text-black text-decoration-none show-details" href="/admin/products/${product.category}/${product.slug}">details</a>
+                    <a class="col-3" href="/admin/products/update/${product.id}">
+                        <span class="update-product bg-danger">
+                            <i class="fas fa-pen-alt"></i>
+                        </span>
+                    </a>
+                    <div class="col-3">
+                        <button class="delete-product bg-primary">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
             `
         ).join("")
-        
-        document.querySelector(".products-content").innerHTML = productList;
+        document.querySelectorAll('.delete-product').forEach(btn => btn.addEventListener('dbclick', ProductDelete.delete))
+        document.querySelector(".products-list").innerHTML += productList;
     }
 }
-// LoadingProducts.fetchProducts();
+LoadingProducts.fetchProducts();
+
+class ProductDelete {
+    constructor (productId) {
+        this.productId = productId
+    }
+    deleteProduct() {
+        fetch('/api/admin/products/delete', {
+            method: "post",
+            
+        })
+    }
+    static delete(e) {
+        console.log("anything")
+        console.log(e.target)
+        // let deleteProduct = new ProductDelete()
+    }
+}
