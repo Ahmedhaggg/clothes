@@ -1,0 +1,42 @@
+<%- include('parts/header.ejs') %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 dashboard">
+            <%- include('parts/dashboard.ejs') %> 
+        </div>
+        <div class="offset-1 col-8">
+            <div class="add-product mb-5">
+                <h4 class="h2 text-center mt-5 mb-5">Add product</h4>
+                <form id="add-product">
+                    <input class="form-control shadow-none p-3 mb-3" id="name" placeholder="name" type="text">
+                    <input class="form-control shadow-none p-3 mb-3" id="category" placeholder="category" type="text">
+                    <input class="form-control shadow-none p-3 mb-3" id="price" placeholder="price" type="number">
+                    <input class="form-control shadow-none p-3 mb-3" id="discount" placeholder="discount" type="number">
+                    <div class="input-group input-search mb-3">
+                        <input type="text" class="form-control shadow-none color-input" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-search shadow-none add-color" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="colors-show mb-3 list-unstyled">
+                        
+                    </ul>
+                    <div class="custom-input-file mb-3">
+                        <input type="file" class="form-control shadow-none product-image">
+                    </div>
+                    <div class="preview-image-choosed mb-3">
+                        <img src="" class="w-100 h-100" alt="product-image">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <textarea class="p-3 mb-3"></textarea>
+                    <button class="custom-btn" type="submit">Add Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('parts/bottom') %> 
+<script src="/js/addproduct.js"></script>
+</html>

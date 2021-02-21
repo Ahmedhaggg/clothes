@@ -24,6 +24,10 @@ const options = {
 }
 mongoose.connect('mongodb+srv://travels:AhmedHaggag@12345@cluster0.u5klm.mongodb.net/clothes?retryWrites=true&w=majority', options);
 
+app.post('/test', (req, res, next) => {
+    console.log(req.body)
+    res.json({message: 'solved in sha allah'})
+})
 // import routes
 const userRouter = require('./routes/user')
 const productsRouter = require('./routes/products');
